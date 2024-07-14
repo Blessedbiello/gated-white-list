@@ -5,7 +5,7 @@ seeds = false
 skip-lint = false
 
 [programs.localnet]
-counter = "3sUi78FsNDGBK12dBj4MZNJRpQAaokW6gTs9NrHjfH3P"
+whitelist_token_sale = "anchor/programs/gated-whitelist/src/lib.rs"
 
 [registry]
 url = "https://api.apr.dev"

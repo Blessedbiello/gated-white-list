@@ -1,0 +1,607 @@
+{
+  "address": "A1QHrhtGGSMDGaAtXvHwCGLFcABbjVnfuZikLkQipGDn",
+  "metadata": {
+    "name": "whitelist_token_sale",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "add_to_whitelist",
+      "docs": [
+        "* Add the account `account_to_add` with the specified bump to the `whitelist` account."
+      ],
+      "discriminator": [
+        157,
+        211,
+        52,
+        54,
+        144,
+        81,
+        5,
+        55
+      ],
+      "accounts": [
+        {
+          "name": "entry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "arg",
+                "path": "account_to_add"
+              },
+              {
+                "kind": "account",
+                "path": "whitelist"
+              }
+            ]
+          }
+        },
+        {
+          "name": "whitelist"
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "whitelist"
+          ]
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "account_to_add",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "buy_tokens",
+      "discriminator": [
+        189,
+        21,
+        230,
+        133,
+        247,
+        2,
+        110,
+        42
+      ],
+      "accounts": [
+        {
+          "name": "buyer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "sale",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  97,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "sale.authority",
+                "account": "Sale"
+              },
+              {
+                "kind": "account",
+                "path": "sale.whitelist",
+                "account": "Sale"
+              }
+            ]
+          }
+        },
+        {
+          "name": "whitelist_entry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "buyer"
+              },
+              {
+                "kind": "account",
+                "path": "sale.whitelist",
+                "account": "Sale"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "buyer"
+              },
+              {
+                "kind": "account",
+                "path": "sale"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "check_whitelist",
+      "docs": [
+        "* Check if the given whitelist exists (has been initalized)."
+      ],
+      "discriminator": [
+        202,
+        135,
+        140,
+        249,
+        143,
+        1,
+        201,
+        143
+      ],
+      "accounts": [
+        {
+          "name": "whitelist",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "arg",
+                "path": "owner"
+              },
+              {
+                "kind": "arg",
+                "path": "name"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "owner",
+          "type": "pubkey"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "check_whitelisted",
+      "docs": [
+        "* Check if the account `account_to_check` is whitelisted in the given `whitelist` account."
+      ],
+      "discriminator": [
+        55,
+        32,
+        174,
+        31,
+        5,
+        246,
+        187,
+        13
+      ],
+      "accounts": [
+        {
+          "name": "entry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "arg",
+                "path": "account_to_check"
+              },
+              {
+                "kind": "account",
+                "path": "whitelist"
+              }
+            ]
+          }
+        },
+        {
+          "name": "whitelist"
+        }
+      ],
+      "args": [
+        {
+          "name": "account_to_check",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "delete_whitelist",
+      "docs": [
+        "* Delete a whitelist create with `init_whitelist` with the given name and bump,\n     * associated with the authority of this transaction. The remaining lamports are sent to the\n     * authority of this transaction."
+      ],
+      "discriminator": [
+        229,
+        26,
+        200,
+        168,
+        119,
+        177,
+        128,
+        19
+      ],
+      "accounts": [
+        {
+          "name": "whitelist",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "arg",
+                "path": "name"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "init_sale",
+      "discriminator": [
+        41,
+        197,
+        251,
+        217,
+        167,
+        153,
+        95,
+        49
+      ],
+      "accounts": [
+        {
+          "name": "sale",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  97,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "whitelist"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "whitelist"
+          ]
+        },
+        {
+          "name": "whitelist"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "token_price",
+          "type": "u64"
+        },
+        {
+          "name": "max_per_wallet",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "init_whitelist",
+      "docs": [
+        "* Initialize a whitelist with the given name, associated with the authority of this transaction."
+      ],
+      "discriminator": [
+        103,
+        193,
+        162,
+        241,
+        234,
+        97,
+        110,
+        71
+      ],
+      "accounts": [
+        {
+          "name": "whitelist",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "arg",
+                "path": "name"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "remove_from_whitelist",
+      "docs": [
+        "* Remove the account `account_to_delete` with the specified bump from the `whitelist` account.\n     * Remaining lamports are sent to the authority of this transaction."
+      ],
+      "discriminator": [
+        7,
+        144,
+        216,
+        239,
+        243,
+        236,
+        193,
+        235
+      ],
+      "accounts": [
+        {
+          "name": "entry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "arg",
+                "path": "account_to_delete"
+              },
+              {
+                "kind": "account",
+                "path": "whitelist"
+              }
+            ]
+          }
+        },
+        {
+          "name": "whitelist"
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "whitelist"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "account_to_delete",
+          "type": "pubkey"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Sale",
+      "discriminator": [
+        202,
+        64,
+        232,
+        171,
+        178,
+        172,
+        34,
+        183
+      ]
+    },
+    {
+      "name": "User",
+      "discriminator": [
+        159,
+        117,
+        95,
+        227,
+        239,
+        151,
+        58,
+        236
+      ]
+    },
+    {
+      "name": "WhitelistEntry",
+      "discriminator": [
+        51,
+        70,
+        173,
+        81,
+        219,
+        192,
+        234,
+        62
+      ]
+    },
+    {
+      "name": "WhitelistTokenSale",
+      "discriminator": [
+        70,
+        158,
+        0,
+        238,
+        229,
+        63,
+        136,
+        60
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "MaxPurchaseLimitReached",
+      "msg": "Max purchase limit reached"
+    },
+    {
+      "code": 6001,
+      "name": "InsufficientFunds",
+      "msg": "Insufficient funds"
+    }
+  ],
+  "types": [
+    {
+      "name": "Sale",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "token_price",
+            "type": "u64"
+          },
+          {
+            "name": "max_per_wallet",
+            "type": "u64"
+          },
+          {
+            "name": "whitelist",
+            "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "User",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "purchased_amount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WhitelistEntry",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "parent",
+            "type": "pubkey"
+          },
+          {
+            "name": "whitelisted",
+            "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WhitelistTokenSale",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  ]
+}
