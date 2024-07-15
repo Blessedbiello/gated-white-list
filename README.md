@@ -1,4 +1,33 @@
-# gated-white-list
+
+#Whitelist Token Sale Application
+##Overview
+The Whitelist Token Sale application allows users to participate in a whitelist-gated sale for a new token. It is built on the Solana blockchain and Anchor framework.
+
+##Features
+*Whitelist management
+*Whitelist-gated token sale
+*Static token price
+*Purchase limit per wallet
+
+#Project Structure
+├── migrations/
+├── programs/
+│   └── whitelist_token_sale/
+│       ├── src/
+│       │   ├── instructions/
+│       │   │   ├── add_whitelist.rs
+│       │   │   ├── buy_token.rs
+│       │   │   ├── init_sale.rs
+│       │   │   ├── init_whitelist.rs
+│       │   ├── states/
+│       │   │   ├── account.rs
+│       │   │   ├── sale.rs
+│       │   │   ├── user.rs
+│       │   ├── lib.rs
+│       │   ├── errors.rs
+├── tests/
+│   └── whitelist_token_sale.spec.ts
+└── target/
 
 This project is generated with the [create-solana-dapp](https://github.com/solana-developers/create-solana-dapp) generator.
 
