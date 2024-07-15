@@ -1,15 +1,15 @@
 
-#Whitelist Token Sale Application
-##Overview
+# Whitelist Token Sale Application
+## Overview
 The Whitelist Token Sale application allows users to participate in a whitelist-gated sale for a new token. It is built on the Solana blockchain and Anchor framework.
 
-##Features
-*Whitelist management
-*Whitelist-gated token sale
-*Static token price
-*Purchase limit per wallet
+## Features
+* Whitelist management
+* Whitelist-gated token sale
+* Static token price
+* Purchase limit per wallet
 
-#Project Structure
+# Project Structure
 ├── migrations/
 ├── programs/
 │   └── whitelist_token_sale/
