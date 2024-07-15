@@ -46,8 +46,8 @@ This project is generated with the [create-solana-dapp](https://github.com/solan
 #### Clone the repo
 
 ```shell
-git clone <repo-url>
-cd <repo-name>
+git clone https://github.com/yourusername/whitelist-token-sale.git
+cd whitelist-token-sale
 ```
 
 #### Install Dependencies
